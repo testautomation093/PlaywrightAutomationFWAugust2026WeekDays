@@ -223,7 +223,7 @@ stage('STEP 4 - QA Regression Tests') {
             echo "=============================================="
 
             bat '''
-                docker pull testautomation093/pw-framework:latest
+                docker pull testautomation093/pwaugustweekdayslatestfw2026:latest
             '''
 
             echo "=============================================="
@@ -240,7 +240,7 @@ stage('STEP 4 - QA Regression Tests') {
                 -e ENV=qa ^
                 -v "%WORKSPACE%\\reports:/app/reports" ^
                 -v "%WORKSPACE%\\allure-results:/app/allure-results" ^
-                testautomation093/pwaugustweekdaysfw2026:latest
+                testautomation093/pwaugustweekdayslatestfw2026:latest
 
             '''
         }
@@ -315,7 +315,7 @@ stage('STEP 6 - STAGE Sanity Tests') {
             echo "=============================================="
 
             bat '''
-                docker pull testautomation093/pw-framework:latest
+                docker pull testautomation093/pwaugustweekdayslatestfw2026:latest
             '''
 
             echo "=============================================="
@@ -332,7 +332,7 @@ stage('STEP 6 - STAGE Sanity Tests') {
                 -e ENV=stage ^
                 -v "%WORKSPACE%\\reports:/app/reports" ^
                 -v "%WORKSPACE%\\allure-results:/app/allure-results" ^
-                testautomation093/pwaugustweekdaysfw2026:latest ^
+                testautomation093/pwaugustweekdayslatestfw2026:latest ^
                 npx playwright test --project=chromium --grep @sanity
 
             '''
