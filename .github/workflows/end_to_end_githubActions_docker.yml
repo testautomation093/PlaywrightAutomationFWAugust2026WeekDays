@@ -478,108 +478,108 @@ jobs:
 # (SIMULATION ONLY)
 # ═══════════════════════════════════════════════════════════════
 
-deploy-prod:
+    deploy-prod:
 
-  name: 🚀 Deploy Application to PROD
+      name: 🚀 Deploy Application to PROD
 
-  needs: stage-sanity
+      needs: stage-sanity
 
-  runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
-  environment: production
+      environment: production
 
-  steps:
+      steps:
 
-    - name: Download Build Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: application-build
-        path: build-artifact
+        - name: Download Build Artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: application-build
+            path: build-artifact
 
-    - name: Verify Build Artifact
-      run: |
-        echo ""
-        echo "Downloaded Build Artifact"
-        ls -R build-artifact
+        - name: Verify Build Artifact
+          run: |
+            echo ""
+            echo "Downloaded Build Artifact"
+            ls -R build-artifact
 
-    - name: Deploy to PROD
-      run: |
+        - name: Deploy to PROD
+          run: |
 
-        echo ""
-        echo "=============================================="
-        echo "Deploying Application to PRODUCTION"
-        echo "=============================================="
+            echo ""
+            echo "=============================================="
+            echo "Deploying Application to PRODUCTION"
+            echo "=============================================="
 
-        echo ""
-        echo "Application Successfully Deployed ✅"
+            echo ""
+            echo "Application Successfully Deployed ✅"
 
-        echo ""
-        echo "Production URL"
-        echo "https://www.company.com"
+            echo ""
+            echo "Production URL"
+            echo "https://www.company.com"
 
-        echo ""
-        echo "Pipeline Moving To Report Publishing..."
+            echo ""
+            echo "Pipeline Moving To Report Publishing..."
 
-        echo "=============================================="
+            echo "=============================================="
 
 # ═══════════════════════════════════════════════════════════════
 # STEP 8
 # PUBLISH REPORTS TO GITHUB PAGES
 # ═══════════════════════════════════════════════════════════════
 
-publish-reports:
+    publish-reports:
 
-  name: 📊 Publish Reports to GitHub Pages
+      name: 📊 Publish Reports to GitHub Pages
 
-  needs:
-    - deploy-prod
-    - qa-regression
-    - stage-sanity
+      needs:
+        - deploy-prod
+        - qa-regression
+        - stage-sanity
 
-  if: always()
+      if: always()
 
-  runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
-  permissions:
-    contents: write
-    pages: write
-    id-token: write
+      permissions:
+        contents: write
+        pages: write
+        id-token: write
 
-  steps:
+      steps:
 
-    # ---------------------------------------------------------
-    # Download Reports
-    # ---------------------------------------------------------
+        # ---------------------------------------------------------
+        # Download Reports
+        # ---------------------------------------------------------
 
-    - name: Download QA HTML Report
-      uses: actions/download-artifact@v4
-      with:
-        name: qa-html-report
-        path: downloaded-reports/qa/html
+        - name: Download QA HTML Report
+          uses: actions/download-artifact@v4
+          with:
+            name: qa-html-report
+            path: downloaded-reports/qa/html
 
-    - name: Download QA Allure Report
-      uses: actions/download-artifact@v4
-      with:
-        name: qa-allure-report
-        path: downloaded-reports/qa/allure
+        - name: Download QA Allure Report
+          uses: actions/download-artifact@v4
+          with:
+            name: qa-allure-report
+            path: downloaded-reports/qa/allure
 
-    - name: Download STAGE HTML Report
-      uses: actions/download-artifact@v4
-      with:
-        name: stage-html-report
-        path: downloaded-reports/stage/html
+        - name: Download STAGE HTML Report
+          uses: actions/download-artifact@v4
+          with:
+            name: stage-html-report
+            path: downloaded-reports/stage/html
 
-    - name: Download STAGE Allure Report
-      uses: actions/download-artifact@v4
-      with:
-        name: stage-allure-report
-        path: downloaded-reports/stage/allure
+        - name: Download STAGE Allure Report
+          uses: actions/download-artifact@v4
+          with:
+            name: stage-allure-report
+            path: downloaded-reports/stage/allure
 
-    - name: Download Unit Test Reports
-      uses: actions/download-artifact@v4
-      with:
-        name: unit-test-results
-        path: downloaded-reports/unit-tests
+        - name: Download Unit Test Reports
+          uses: actions/download-artifact@v4
+          with:
+            name: unit-test-results
+            path: downloaded-reports/unit-tests
 
     # ---------------------------------------------------------
     # Organize Reports
